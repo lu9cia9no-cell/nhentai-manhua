@@ -3,32 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>免翻墙成人漫画站 - 每日更新</title>
+    <title>最新本子每日更新 - 免翻墙秒开</title>
+    <meta name="description" content="每日更新nhentai最新最热同人H本，免翻墙直连，高速浏览">
     <style>
-        body {font-family:Arial;background:#111;color:#fff;margin:0;padding:20px;}
-        h1 {color:#ff6bcb;text-align:center;}
-        .grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:15px;}
-        .item {text-align:center;background:#222;padding:10px;border-radius:8px;}
-        img {width:100%;border-radius:8px;}
-        a {color:#ff6bcb;text-decoration:none;}
+        body{background:#000;color:#fff;font-family:Arial;margin:0;padding:20px 0;text-align:center;background:linear-gradient(135deg,#1a0033,#000)}
+        h1{color:#ff66cc;font-size:2.5em;margin:20px 0;text-shadow:0 0 15px #ff66cc}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:15px;padding:0 10px;max-width:1200px;margin:0 auto}
+        .item{position:relative;overflow:hidden;border-radius:12px;box-shadow:0 4px 15px rgba(255,102,204,0.4);transition:0.3s}
+        .item:hover{transform:scale(1.05);box-shadow:0 8px 25px rgba(255,102,204,0.7)}
+        img{width:100%;height:200px;object-fit:cover;border-radius:12px}
+        .title{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:8px;font-size:0.9em;line-height:1.3}
+        .tag{position:absolute;top:5px;left:5px;background:#ff1493;padding:2px 6px;border-radius:4px;font-size:0.7em}
+        .loading{color:#ff66cc;font-size:1.2em;margin:50px}
     </style>
 </head>
 <body>
-    <h1>最新本子（测试站）</h1>
-    <div class="grid" id="list"></div>
+    <h1>🔥 最新本子 (每小时更新)</h1>
+    <div id="list" class="grid"><div class="loading">加载中...</div></div>
 
-    <script>
-        // 假数据，后面你用爬虫生成的 json 替换这里就行
-        const data = [
-            {title:"[测试] 修女堕落",cover:"https://t.nhentai.net/galleries/2684123/cover.jpg",url:"https://nhentai.net/g/521743/"},
-            {title:"[测试] 巨乳JK",cover:"https://t.nhentai.net/galleries/2683999/cover.jpg",url:"https://nhentai.net/g/521699/"},
-        ];
-        const div = document.getElementById('list');
-        data.forEach(m=>{ 
-            div.innerHTML += `<div class="item"><a href="${m.url}" target="_blank">
-            <img src="${m.cover}" loading="lazy"><br>${m.title}</a></div>`;
-        });
+    <!-- ExoClick 广告位1：弹窗 -->
+    <script type="text/javascript">
+        var ad_id = 1234567; // ←←←← 改成你注册ExoClick后给的 Zone ID
+        (function() {
+            var pa = document.createElement('script'); pa.async = true;
+            pa.src = 'https://a.exoclick.com/popunder1000.js';
+            pa.type = 'text/javascript';
+            document.body.appendChild(pa);
+        })();
     </script>
-</body>
+
+    <!-- 主体代码 -->
+    <script>
+        async function load() {
+            try {
+                const res = await fetch('https://nhentai.net/api/galleries/search?query=&page=1&sort=recent');
+                const json = await res.json();
+                const list = document.getElementById('list');
+                list.innerHTML = '';
+                json.result.slice(0,60).forEach(g => {
+                    const tags = g.tags.filter(t=>t.type==='tag').map(t=>t.name).slice(0,2).join(',');
+                    const div = document.createElement('div');
+                    div.className = 'item';
+                    div.innerHTML = `
+                        <div class="tag">新</div>
+                        <a href="https://nhentai.net/g/${g.id}/" target="_blank">
+                            <img src="https://t.nhentai.net/galleries/${g.media_id}/cover.jpg" loading="lazy">
+                            <div class="title">${g.title.pretty || g.title.english}</div>
+                        </a>
+                    `;
+                    list.appendChild(div);
+                });
+            } catch(e) {
+                document.getElementById('list').innerHTML = '<div style="color:#ff66cc">加载失败，请刷新重试</div>';
+            }
+        }
+        load();
+        setInterval(load, 3600000); // 每小时刷新一次
+    </script>
+
+    <!-- ExoClick 广告位2：横幅（放在最下面） -->
+    <div style="margin:30px auto;max-width:728px">
+        <script type="text/javascript">
+            var zoneid = 1234568; // ←←← 改成你的横幅 Zone ID
+        </script>
+        <script type="text/javascript" src="https://ads.exoclick.com/ads.js"></script>
+        <noscript><a href="https://main.exoclick.com/tag.php?tag=1234568" target="_blank"><img src="https://syndication.exoclick.com/ads-iframe-display.php?idzone=1234568&output=img&type=728x90" width="728" height="90"></a></noscript>
+    </div>
 </body>
 </html>
