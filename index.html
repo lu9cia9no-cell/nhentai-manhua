@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免翻墙成人漫画站 - 每日更新</title>
+    <style>
+        body {font-family:Arial;background:#111;color:#fff;margin:0;padding:20px;}
+        h1 {color:#ff6bcb;text-align:center;}
+        .grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:15px;}
+        .item {text-align:center;background:#222;padding:10px;border-radius:8px;}
+        img {width:100%;border-radius:8px;}
+        a {color:#ff6bcb;text-decoration:none;}
+    </style>
+</head>
+<body>
+    <h1>最新本子（测试站）</h1>
+    <div class="grid" id="list"></div>
+
+    <script>
+        // 假数据，后面你用爬虫生成的 json 替换这里就行
+        const data = [
+            {title:"[测试] 修女堕落",cover:"https://t.nhentai.net/galleries/2684123/cover.jpg",url:"https://nhentai.net/g/521743/"},
+            {title:"[测试] 巨乳JK",cover:"https://t.nhentai.net/galleries/2683999/cover.jpg",url:"https://nhentai.net/g/521699/"},
+        ];
+        const div = document.getElementById('list');
+        data.forEach(m=>{ 
+            div.innerHTML += `<div class="item"><a href="${m.url}" target="_blank">
+            <img src="${m.cover}" loading="lazy"><br>${m.title}</a></div>`;
+        });
+    </script>
+</body>
+</body>
+</html>
