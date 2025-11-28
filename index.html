@@ -3,67 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>最新本子·每小时更新 - 免翻墙秒开</title>
+    <title>最新本子·实时更新</title>
     <style>
         body{background:#000;color:#fff;font-family:Arial;margin:0;padding:20px 0;text-align:center;background:linear-gradient(135deg,#1a0033,#000)}
         h1{color:#ff66cc;font-size:2.5em;margin:20px 0;text-shadow:0 0 20px #ff66cc}
-        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;padding:0 10px;max-width:1400px;margin:0 auto}
-        .item{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(255,102,204,0.4);transition:0.3s}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;padding:0 10px;max-width:1400px;margin:auto}
+        .item{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(255,102,204,0.4);transition:.3s}
         .item:hover{transform:scale(1.06)}
         img{width:100%;height:210px;object-fit:cover}
         .title{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,#000);padding:15px 8px 8px;font-size:0.9em;line-height:1.3}
         .tag{position:absolute;top:8px;left:8px;background:#ff1493;padding:3px 8px;border-radius:6px;font-size:0.75em}
-        .loading{color:#ff66cc;font-size:1.3em;margin:60px}
-        .error{color:#ff4444;font-size:1.1em;margin:40px}
     </style>
 </head>
 <body>
-    <h1>🔥 最新本子（每小时更新）</h1>
-    <div id="list" class="grid"><div class="loading">加载中，请稍等...</div></div>
-
-    <script>
-        async function load() {
-            const list = document.getElementById('list');
-            list.innerHTML = '<div class="loading">加载中...</div>';
-            try {
-                // 绕过反爬：用免费代理 API 拉数据
-                const proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://nhentai.net/api/galleries/search?query=&page=1&sort=recent');
-                const res = await fetch(proxyUrl);
-                if (!res.ok) throw new Error('Proxy failed');
-                const data = await res.json();
-                list.innerHTML = '';
-
-                data.result.slice(0,60).forEach(g => {
-                    const tags = g.tags.filter(t => t.type === 'tag').slice(0,3).map(t => t.name).join(', ');
-                    const div = document.createElement('div');
-                    div.className = 'item';
-                    div.innerHTML = `
-                        <a href="https://nhentai.net/g/${g.id}/" target="_blank">
-                            <div class="tag">NEW</div>
-                            <img src="https://t.nhentai.net/galleries/${g.media_id}/cover.jpg" loading="lazy" alt="${g.title.pretty || g.title.english}">
-                            <div class="title">${g.title.pretty || g.title.english || '未知标题'}<br><small>${tags || '无标签'}</small></div>
-                        </a>
-                    `;
-                    list.appendChild(div);
-                });
-            } catch(e) {
-                list.innerHTML = '<div class="error">加载失败！<br>原因：nhentai 反爬加强<br>刷新重试或等1小时（<a href="" style="color:#ff66cc">点此刷新</a>）</div>';
-                console.error(e); // 调试用
-            }
-        }
-        load();
-        setInterval(load, 3600000); // 每小时自动刷新
-    </script>
-
-    <!-- ExoClick 弹窗广告位（等审核通过填 ID） -->
-    <script type="text/javascript">
-        // var ad_id = 你的 Popunder ID;  // 审核后填
-        // (function() {
-        //     var pa = document.createElement('script'); pa.async = true;
-        //     pa.src = 'https://a.exoclick.com/popunder1000.js';
-        //     pa.type = 'text/javascript';
-        //     document.body.appendChild(pa);
-        // })();
-    </script>
+    <h1>最新本子（实时更新）</h1>
+    <div class="grid">
+        <div class="item">
+            <a href="https://nhentai.net/g/611925/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover1.nhentai.net/galleries/3656262/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611901/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover3.nhentai.net/galleries/3655996/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611738/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover1.nhentai.net/galleries/3654561/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611730/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover4.nhentai.net/galleries/3654368/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611564/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover1.nhentai.net/galleries/3653095/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611952/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover2.nhentai.net/galleries/3656618/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611951/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover3.nhentai.net/galleries/3656607/thumb.jpg.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611950/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover3.nhentai.net/galleries/3656583/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611949/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover3.nhentai.net/galleries/3656575/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611948/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover4.nhentai.net/galleries/3656574/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611947/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover4.nhentai.net/galleries/3656568/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611946/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover2.nhentai.net/galleries/3656541/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611945/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover3.nhentai.net/galleries/3656512/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611944/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover1.nhentai.net/galleries/3656437/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611943/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover1.nhentai.net/galleries/3656436/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611942/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover4.nhentai.net/galleries/3656435/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611941/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover3.nhentai.net/galleries/3656434/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611940/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover2.nhentai.net/galleries/3656433/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611939/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover4.nhentai.net/galleries/3656432/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611938/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover2.nhentai.net/galleries/3656351/thumb.jpg.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611937/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover2.nhentai.net/galleries/3656332/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611936/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover3.nhentai.net/galleries/3656331/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611935/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover3.nhentai.net/galleries/3656311/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611934/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover4.nhentai.net/galleries/3656295/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611933/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover3.nhentai.net/galleries/3656291/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611932/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover4.nhentai.net/galleries/3656285/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611931/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover2.nhentai.net/galleries/3656284/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611930/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover1.nhentai.net/galleries/3656281/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611929/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover2.nhentai.net/galleries/3656270/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+        <div class="item">
+            <a href="https://nhentai.net/g/611928/" target="_blank">
+                <div class="tag">NEW</div>
+                <img src="//cover4.nhentai.net/galleries/3656268/thumb.webp" loading="lazy">
+                <div class="title">无标题</div>
+            </a>
+        </div>
+    </div>
 </body>
 </html>
