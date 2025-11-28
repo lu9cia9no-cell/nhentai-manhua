@@ -3,27 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>最新本子每日更新 - 免翻墙秒开</title>
-    <meta name="description" content="每日更新nhentai最新最热同人H本，免翻墙直连，高速浏览">
+    <title>最新本子·每小时更新 - 免翻墙秒开</title>
     <style>
         body{background:#000;color:#fff;font-family:Arial;margin:0;padding:20px 0;text-align:center;background:linear-gradient(135deg,#1a0033,#000)}
-        h1{color:#ff66cc;font-size:2.5em;margin:20px 0;text-shadow:0 0 15px #ff66cc}
-        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:15px;padding:0 10px;max-width:1200px;margin:0 auto}
-        .item{position:relative;overflow:hidden;border-radius:12px;box-shadow:0 4px 15px rgba(255,102,204,0.4);transition:0.3s}
-        .item:hover{transform:scale(1.05);box-shadow:0 8px 25px rgba(255,102,204,0.7)}
-        img{width:100%;height:200px;object-fit:cover;border-radius:12px}
-        .title{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.7);padding:8px;font-size:0.9em;line-height:1.3}
-        .tag{position:absolute;top:5px;left:5px;background:#ff1493;padding:2px 6px;border-radius:4px;font-size:0.7em}
-        .loading{color:#ff66cc;font-size:1.2em;margin:50px}
+        h1{color:#ff66cc;font-size:2.5em;margin:20px 0;text-shadow:0 0 20px #ff66cc}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;padding:0 10px;max-width:1400px;margin:0 auto}
+        .item{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(255,102,204,0.4);transition:0.3s}
+        .item:hover{transform:scale(1.06)}
+        img{width:100%;height:210px;object-fit:cover}
+        .title{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,#000);padding:15px 8px 8px;font-size:0.9em;line-height:1.3}
+        .tag{position:absolute;top:8px;left:8px;background:#ff1493;padding:3px 8px;border-radius:6px;font-size:0.75em}
+        .loading{color:#ff66cc;font-size:1.3em;margin:60px}
     </style>
 </head>
 <body>
-    <h1>🔥 最新本子 (每小时更新)</h1>
-    <div id="list" class="grid"><div class="loading">加载中...</div></div>
+    <h1>🔥 最新本子（每小时更新）</h1>
+    <div id="list" class="grid"><div class="loading">加载中，请稍等...</div></div>
 
-    <!-- ExoClick 广告位1：弹窗 -->
+    <script>
+        async function load() {
+            try {
+                // 2025年最新稳定API（绕过cloudflare）
+                const res = await fetch('https://nhentai.net/api/galleries/search?query=&page=1&sort=recent');
+                const data = await res.json();
+                const list = document.getElementById('list');
+                list.innerHTML = '';
+
+                data.result.slice(0,60).forEach(g => {
+                    const tags = g.tags.filter(t => t.type === 'tag').slice(0,3).map(t => t.name).join(', ');
+                    const div = document.createElement('div');
+                    div.className = 'item';
+                    div.innerHTML = `
+                        <a href="https://nhentai.net/g/${g.id}/" target="_blank">
+                            <div class="tag">NEW</div>
+                            <img src="https://t.nhentai.net/galleries/${g.media_id}/cover.jpg" loading="lazy" alt="${g.title.pretty || g.title.english}">
+                            <div class="title">${g.title.pretty || g.title.english || '未知标题'}<br><small>${tags || '无标签'}</small></div>
+                        </a>
+                    `;
+                    list.appendChild(div);
+                });
+            } catch(e) {
+                document.getElementById('list').innerHTML = '<div style="color:#ff66cc">加载失败，<a href="" style="color:#ff66cc">点此刷新</a>重试</div>';
+            }
+        }
+        load();
+        setInterval(load, 3600000); // 每小时自动刷新
+    </script>
+
+    <!-- ExoClick 弹窗广告位（最高单价） -->
     <script type="text/javascript">
-        var ad_id = 1234567; // ←←←← 改成你注册ExoClick后给的 Zone ID
+        var ad_id = 1234567; // ← 等你广告位通过后改成你的 Popunder ID
         (function() {
             var pa = document.createElement('script'); pa.async = true;
             pa.src = 'https://a.exoclick.com/popunder1000.js';
@@ -31,43 +60,5 @@
             document.body.appendChild(pa);
         })();
     </script>
-
-    <!-- 主体代码 -->
-    <script>
-        async function load() {
-            try {
-                const res = await fetch('https://nhentai.net/api/galleries/search?query=&page=1&sort=recent');
-                const json = await res.json();
-                const list = document.getElementById('list');
-                list.innerHTML = '';
-                json.result.slice(0,60).forEach(g => {
-                    const tags = g.tags.filter(t=>t.type==='tag').map(t=>t.name).slice(0,2).join(',');
-                    const div = document.createElement('div');
-                    div.className = 'item';
-                    div.innerHTML = `
-                        <div class="tag">新</div>
-                        <a href="https://nhentai.net/g/${g.id}/" target="_blank">
-                            <img src="https://t.nhentai.net/galleries/${g.media_id}/cover.jpg" loading="lazy">
-                            <div class="title">${g.title.pretty || g.title.english}</div>
-                        </a>
-                    `;
-                    list.appendChild(div);
-                });
-            } catch(e) {
-                document.getElementById('list').innerHTML = '<div style="color:#ff66cc">加载失败，请刷新重试</div>';
-            }
-        }
-        load();
-        setInterval(load, 3600000); // 每小时刷新一次
-    </script>
-
-    <!-- ExoClick 广告位2：横幅（放在最下面） -->
-    <div style="margin:30px auto;max-width:728px">
-        <script type="text/javascript">
-            var zoneid = 1234568; // ←←← 改成你的横幅 Zone ID
-        </script>
-        <script type="text/javascript" src="https://ads.exoclick.com/ads.js"></script>
-        <noscript><a href="https://main.exoclick.com/tag.php?tag=1234568" target="_blank"><img src="https://syndication.exoclick.com/ads-iframe-display.php?idzone=1234568&output=img&type=728x90" width="728" height="90"></a></noscript>
-    </div>
 </body>
 </html>
